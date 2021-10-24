@@ -90,6 +90,7 @@
         <finalName>spring-crm-rest</finalName>
         <plugins>
 <!--            Builds a web application archive(WAR) file from the project and its dependencies-->
+<!--            help run the app on command line-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

@@ -1,6 +1,7 @@
 package com.gigacedi.springRestAPI.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.gigacedi.springRestAPI.dao.CustomerDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         customerDAOImpl.deleteCustomer(theId);
     }
+
 }
 
 

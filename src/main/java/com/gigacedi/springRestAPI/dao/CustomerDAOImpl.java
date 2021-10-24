@@ -1,6 +1,7 @@
 package com.gigacedi.springRestAPI.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.gigacedi.springRestAPI.repository.CustomerRepository;
 import org.hibernate.Session;
@@ -34,6 +35,16 @@ public class CustomerDAOImpl {
 //        List<Customer> customers = theQuery.getResultList();
 //
 //        // return the results
+
+
+//        Optional<Customer> result = customerRepository.findById(theId);
+//        Customer customer = null;
+//        if (result.isPresent()) {
+//            customer = result.get();
+//        } else {
+//            throw new RuntimeException("Did not find customer id - "+ theId);
+//        }
+//        return customer;
 
         List<Customer> customers= customerRepository.findAll();
 
