@@ -3,7 +3,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Employee List</title>
+    <title>Customer List</title>
 </head>
 <body>
 <div align="center">
@@ -18,10 +18,10 @@
 
         </thead>
         <tbody>
-        <tr th:each="employee : ${employees}">
-            <td th:text="${employee.firstName}"></td>
-            <td th:text="${employee.lastName}"></td>
-            <td th:text="${employee.email}"></td>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.email}"></td>
         </tr>
         <tbody>
     </table>
