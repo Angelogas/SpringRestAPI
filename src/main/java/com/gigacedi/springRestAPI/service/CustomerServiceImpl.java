@@ -36,6 +36,10 @@ public class CustomerServiceImpl implements CustomerService {
         customerDAOImpl.saveCustomer(theCustomer);
     }
 
+    public void updateCustomer(Customer theCustomer) {
+        customerDAOImpl.update(theCustomer);
+    }
+
     @Override
     public void deleteCustomer(int theId) {
 

@@ -4,17 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import com.gigacedi.springRestAPI.repository.CustomerRepository;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.gigacedi.springRestAPI.entity.Customer;
 
 @Repository
-public class CustomerDAOImpl {
+public class CustomerDAOImpl{
 
     // need to inject the session factory
     @Autowired
@@ -22,20 +18,6 @@ public class CustomerDAOImpl {
 
 
     public List<Customer> getCustomers() {
-
-//        // get the current hibernate session
-//        Session currentSession = sessionFactory.getCurrentSession();
-//
-//        // create a query  ... sort by last name
-//        Query<Customer> theQuery =
-//                currentSession.createQuery("from Customer order by lastName",
-//                        Customer.class);
-//
-//        // execute query and get result list
-//        List<Customer> customers = theQuery.getResultList();
-//
-//        // return the results
-
 
 //        Optional<Customer> result = customerRepository.findById(theId);
 //        Customer customer = null;
@@ -50,29 +32,34 @@ public class CustomerDAOImpl {
 
         return customers;
     }
-//
-//    @Override
-    public void saveCustomer(Customer theCustomer) {
 
-        // get current hibernate session
-        customerRepository.save(theCustomer);
-
-        // save/upate the customer ... finally LOL
-
-    }
-//
-//    @Override
     public Customer getCustomer(int theId) {
 
-//        // get the current hibernate session
-//        Session currentSession = sessionFactory.getCurrentSession();
-//
-//        // now retrieve/read from database using the primary key
-//        Customer theCustomer = currentSession.get(Customer.class, theId);
-
         Customer theCustomer = customerRepository.getById(theId);
-//
+
         return theCustomer;
+    }
+
+    public void saveCustomer(Customer theCustomer) {
+
+        Optional<Customer> result = Optional.ofNullable(customerRepository.findCustomerByFirstNameAndLastName(theCustomer.getFirstName(),
+                theCustomer.getLastName()));
+        if (result.isEmpty()) {
+            customerRepository.save(theCustomer);
+        }else {
+            throw new RuntimeException("Customer already exist. Cannot duplicate");
+        }
+    }
+
+    public void update(Customer theCustomer) {
+
+        try {
+             customerRepository.findCustomerByFirstNameAndLastName(theCustomer.getFirstName(), theCustomer.getLastName());
+            customerRepository.save(theCustomer);
+        } catch (RuntimeException exc) {
+            throw new RuntimeException("Customer not found...");
+        }
+
     }
 
     public void deleteCustomer(int theId) {

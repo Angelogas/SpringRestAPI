@@ -18,6 +18,13 @@ public class CustomerRestExceptionHandler {
     }
 
     @ExceptionHandler
+    public ResponseEntity<CustomerErrorResponse> handleException (CustomerAlreadyExistException exc) {
+        CustomerErrorResponse customerErrorResponse = new CustomerErrorResponse(HttpStatus.ALREADY_REPORTED.value(),
+                exc.getMessage(),System.currentTimeMillis());
+        return new ResponseEntity<>(customerErrorResponse,HttpStatus.ALREADY_REPORTED);
+    }
+
+    @ExceptionHandler
     public ResponseEntity<CustomerErrorResponse> handleException (Exception exc) {
 
         CustomerErrorResponse customerErrorResponse = new CustomerErrorResponse(HttpStatus.BAD_REQUEST.value(),

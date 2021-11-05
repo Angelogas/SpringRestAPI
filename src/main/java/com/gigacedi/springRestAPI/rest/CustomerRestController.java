@@ -34,14 +34,13 @@ public class CustomerRestController {
     @PostMapping ("/customers/save")
     public Customer addCustomer (@RequestBody Customer theCustomer) {
 
-//        theCustomer.setId(3);
         customerService.saveCustomer(theCustomer);
         return theCustomer;
     }
 
-    @PutMapping ("customers")
+    @PutMapping ("customers/update")
     public Customer updateCustomer (@RequestBody Customer theCustomer) {
-        customerService.saveCustomer(theCustomer);
+        customerService.updateCustomer (theCustomer);
         return theCustomer;
     }
 

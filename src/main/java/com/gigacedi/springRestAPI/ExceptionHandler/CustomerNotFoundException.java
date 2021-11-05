@@ -1,6 +1,7 @@
 package com.gigacedi.springRestAPI.ExceptionHandler;
 
 public class CustomerNotFoundException extends RuntimeException{
+
     public CustomerNotFoundException() {
     }
 
