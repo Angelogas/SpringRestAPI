@@ -41,9 +41,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(int theId) {
+    public void deleteCustomer(Customer customer) {
 
-        customerDAOImpl.deleteCustomer(theId);
+        customerDAOImpl.deleteCustomer(customer);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        customerDAOImpl.deleteCustomerById(id);
     }
 
 }

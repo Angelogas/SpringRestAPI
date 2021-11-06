@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="associates_info")
+@Table(name ="assiociates_info")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customer {
 
@@ -20,15 +20,16 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private int id;
 
-    @Column(name = "First_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "Last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
 
 

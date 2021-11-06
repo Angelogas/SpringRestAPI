@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CustomerRestExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<CustomerErrorResponse> handleException (CustomerNotFoundException exc) {
+    public ResponseEntity<CustomerErrorResponse> handleException (CustomerAllException exc) {
 
         CustomerErrorResponse customerErrorResponse = new CustomerErrorResponse(HttpStatus.NOT_FOUND.value(),
                 exc.getMessage(), System.currentTimeMillis() );

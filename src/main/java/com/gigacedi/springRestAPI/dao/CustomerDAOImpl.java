@@ -3,6 +3,8 @@ package com.gigacedi.springRestAPI.dao;
 import java.util.List;
 import java.util.Optional;
 
+import com.gigacedi.springRestAPI.ExceptionHandler.CustomerAlreadyExistException;
+import com.gigacedi.springRestAPI.ExceptionHandler.CustomerAllException;
 import com.gigacedi.springRestAPI.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,31 +44,69 @@ public class CustomerDAOImpl{
 
     public void saveCustomer(Customer theCustomer) {
 
-        Optional<Customer> result = Optional.ofNullable(customerRepository.findCustomerByFirstNameAndLastName(theCustomer.getFirstName(),
-                theCustomer.getLastName()));
-        if (result.isEmpty()) {
-            customerRepository.save(theCustomer);
-        }else {
-            throw new RuntimeException("Customer already exist. Cannot duplicate");
-        }
+        try {
+
+            Customer customer = findCustomer(theCustomer);
+
+            if (customer == null) {
+                theCustomer.setId(0);
+                customerRepository.save(theCustomer);
+            } else {
+                throw new CustomerAlreadyExistException();
+            }
+            } catch (CustomerAlreadyExistException exc) {
+                throw new CustomerAllException();
+
+            } catch (RuntimeException e) {
+                throw new CustomerAllException(new IllegalArgumentException());
+            }
     }
 
     public void update(Customer theCustomer) {
 
+        Customer customer = findCustomer(theCustomer);
+        int id = customer.getId();
+        if (id != theCustomer.getId()) {
+            throw new CustomerAllException(customer.getFirstName(),customer.getFirstName());
+        }
         try {
-             customerRepository.findCustomerByFirstNameAndLastName(theCustomer.getFirstName(), theCustomer.getLastName());
-            customerRepository.save(theCustomer);
-        } catch (RuntimeException exc) {
-            throw new RuntimeException("Customer not found...");
+            customer.setId(id);
+            customerRepository.save(customer);
+        }catch (NullPointerException e) {
+            throw new CustomerAllException(new NullPointerException());
+        }catch (RuntimeException e) {
+            throw new CustomerAllException(new IllegalArgumentException());
+        }
+    }
+
+    public void deleteCustomer(Customer theCustomer) {
+
+        try {
+            Customer customer = findCustomer(theCustomer);
+            customerRepository.delete(customer);
+
+        } catch (NullPointerException exc) {
+            throw new CustomerAllException(exc);
+        }
+        catch (RuntimeException e) {
+            throw new CustomerAllException(new IllegalArgumentException());
+        }
+    }
+
+    public void deleteCustomerById(int id) {
+
+        try {
+        Optional<Customer> customer = customerRepository.findById(id);
+            customerRepository.delete(customer.get());
+        } catch (NullPointerException exc) {
+            throw new CustomerAllException(exc);
         }
 
     }
 
-    public void deleteCustomer(int theId) {
-
-        customerRepository.deleteById(theId);
+    public Customer findCustomer(Customer customer) {
+        return customerRepository.findCustomerByFirstNameAndLastName(customer.getFirstName(),customer.getLastName());
     }
-
 }
 
 
