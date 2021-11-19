@@ -1,7 +1,7 @@
 package com.gigacedi.springRestAPI.rest;
 
 import com.gigacedi.springRestAPI.ExceptionHandler.CustomerAllException;
-import com.gigacedi.springRestAPI.entity.Customer;
+import com.gigacedi.springRestAPI.Model.Customer;
 import com.gigacedi.springRestAPI.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.gigacedi.springRestAPI.repository;
 
-import com.gigacedi.springRestAPI.entity.Customer;
+import com.gigacedi.springRestAPI.Model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

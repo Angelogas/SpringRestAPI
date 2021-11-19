@@ -2,7 +2,7 @@ package com.gigacedi.springRestAPI.service;
 
 import java.util.List;
 
-import com.gigacedi.springRestAPI.entity.Customer;
+import com.gigacedi.springRestAPI.Model.Customer;
 import org.springframework.stereotype.Service;
 
 @Service

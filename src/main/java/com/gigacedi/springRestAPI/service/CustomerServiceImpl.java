@@ -1,15 +1,12 @@
 package com.gigacedi.springRestAPI.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.gigacedi.springRestAPI.dao.CustomerDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.gigacedi.springRestAPI.dao.CustomerDAO;
-import com.gigacedi.springRestAPI.entity.Customer;
+import com.gigacedi.springRestAPI.Model.Customer;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

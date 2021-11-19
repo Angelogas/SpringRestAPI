@@ -9,7 +9,7 @@ import com.gigacedi.springRestAPI.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gigacedi.springRestAPI.entity.Customer;
+import com.gigacedi.springRestAPI.Model.Customer;
 
 @Repository
 public class CustomerDAOImpl{
